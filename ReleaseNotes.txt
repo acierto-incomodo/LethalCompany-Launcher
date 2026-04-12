@@ -1,7 +1,7 @@
 Cambios
 
-Launcher (v1.0.0):
+Launcher (v1.0.2):
 - NaN
 
-Juego (v1.3.2):
+Juego (v81 ModsBuild v1):
 - NaN

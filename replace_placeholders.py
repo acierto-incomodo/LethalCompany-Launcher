@@ -5,14 +5,16 @@ import sys
 # ================= CONFIGURACIÓN =================
 # Define aquí los valores reales por los que quieres reemplazar los marcadores.
 REPLACEMENTS = {
-    "{NAME}": "REPO",       # Nombre visible del juego
-    "{ID}": "repo",         # ID usado en rutas/carpetas (sin espacios)
-    "{REMOVE}": "REPO",  # Nombre del ejecutable/proceso a cerrar
-    "{GITHUB}": "repo-game"
+    "{NAME}": "",       # Nombre visible del juego
+    "{ID}": "",         # ID usado en rutas/carpetas (sin espacios)
+    "{REMOVE}": "",  # Nombre del ejecutable/proceso a cerrar
+    "{GITHUB}": "",
+    "{OLDREMOVE}": "",
+    "{OLDDIR}": "",
 }
 
 # Extensiones de archivos que se escanearán (para evitar dañar binarios o imágenes)
-ALLOWED_EXTENSIONS = {".py", ".iss", ".txt", ".md", ".bat", ".ps1", ".sh", ".spec", ".json"}
+ALLOWED_EXTENSIONS = {".py", ".iss", ".txt", ".md", ".bat", ".ps1", ".sh", ".json"}
 # =================================================
 
 def replace_in_file(file_path):

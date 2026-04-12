@@ -16,7 +16,8 @@ $files = @(
   "installer_updater.spec",
   "version_win_launcher.txt",
   "Launcher_Portable.py",
-  "Launcher_Portable.spec"
+  "Launcher_Portable.spec",
+  "*.spec"
 )
 
 foreach ($folder in $folders) {

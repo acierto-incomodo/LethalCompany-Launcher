@@ -15,7 +15,7 @@ def find_and_run_uninstaller():
         return
 
     # 2. Construir la ruta completa a la carpeta del launcher antiguo
-    old_launcher_dir = Path(appdata_path) / "StormGamesStudios" / "NewGameDir" / "LethalCompany-Launcher"
+    old_launcher_dir = Path(appdata_path) / "StormGamesStudios" / "NewGameDir" / "LethalCompany_Launcher"
 
     print(f"Buscando desinstalador antiguo en: {old_launcher_dir}")
 

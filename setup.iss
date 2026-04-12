@@ -1,44 +1,38 @@
 [Setup]
-AppName=R.E.P.O. Launcher by StormGamesStudios
-AppVersion=1.0.6
-DefaultDirName={userappdata}\StormGamesStudios\NewGameDir\repo-game
+AppName=Lethal Company by StormGamesStudios
+AppVersion=1.0.5
+DefaultDirName={userappdata}\StormGamesStudios\NewGameDir\LethalCompany_Launcher
 DefaultGroupName=StormGamesStudios
-OutputDir=C:\Users\melio\Documents\GitHub\repo-game\output
-OutputBaseFilename=REPO_Launcher_Installer
+OutputDir=C:\Users\melio\Documents\GitHub\LethalCompany-Launcher\output
+OutputBaseFilename=LethalCompany_Launcher_Installer
 Compression=lzma
 SolidCompression=yes
 AppCopyright=Copyright © 2025 StormGamesStudios. All rights reserved.
 VersionInfoCompany=StormGamesStudios
 AppPublisher=StormGamesStudios
-SetupIconFile=repo.ico
-VersionInfoVersion=1.0.6.0
+SetupIconFile=lethalcompany.ico
+VersionInfoVersion=1.0.5.0
 DisableProgramGroupPage=yes
 ; Habilitar selección de carpeta
 DisableDirPage=yes
-UsePreviousAppDir=no
 
 [Files]
-Source: "C:\Users\melio\Documents\GitHub\repo-game\dist\installer_updater.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\melio\Documents\GitHub\repo-game\repo.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\melio\Documents\GitHub\repo-game\repo.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\melio\Documents\GitHub\repo-game\dist\uninstaller-old.exe"; DestDir: "{tmp}"; Flags: dontcopy
+Source: "C:\Users\melio\Documents\GitHub\LethalCompany-Launcher\dist\installer_updater.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\melio\Documents\GitHub\LethalCompany-Launcher\lethalcompany.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\melio\Documents\GitHub\LethalCompany-Launcher\lethalcompany.png"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
-Name: "{commonprograms}\StormGamesStudios\R.E.P.O. Launcher"; Filename: "{app}\installer_updater.exe"; IconFilename: "{app}\repo.ico"; Comment: "Lanzador de R.E.P.O. Launcher"; WorkingDir: "{app}"
-Name: "{commonprograms}\StormGamesStudios\Desinstalar R.E.P.O. Launcher"; Filename: "{uninstallexe}"; IconFilename: "{app}\repo.ico"; Comment: "Desinstalar R.E.P.O. Launcher"
-
-; Acceso directo en el menú de inicio dentro de la carpeta StormLauncher_HMCL-Edition
-Name: "{commonprograms}\StormGamesStudios\R.E.P.O. Launcher"; Filename: "{app}\installer_updater.exe"; IconFilename: "{app}\repo.ico"
-Name: "{commonprograms}\StormGamesStudios\Desinstalar R.E.P.O. Launcher"; Filename: "{uninstallexe}"; IconFilename: "{app}\repo.ico"
+Name: "{commonprograms}\StormGamesStudios\Lethal Company"; Filename: "{app}\installer_updater.exe"; IconFilename: "{app}\lethalcompany.ico"; Comment: "Lanzador de Lethal Company"; WorkingDir: "{app}"
+Name: "{commonprograms}\StormGamesStudios\Desinstalar Lethal Company"; Filename: "{uninstallexe}"; IconFilename: "{app}\lethalcompany.ico"; Comment: "Desinstalar Lethal Company"
 
 [Registry]
-Root: HKCU; Subkey: "Software\R.E.P.O. Launcher"; ValueType: string; ValueName: "Install_Dir"; ValueData: "{app}"
+Root: HKCU; Subkey: "Software\Lethal Company"; ValueType: string; ValueName: "Install_Dir"; ValueData: "{app}"
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}"
 
 [Run]
-Filename: "{app}\installer_updater.exe"; Description: "Ejecutar R.E.P.O. Launcher"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\installer_updater.exe"; Description: "Ejecutar Lethal Company"; Flags: nowait postinstall skipifsilent
 
 [Code]
 function IsDirectoryEmpty(DirPath: String): Boolean;
@@ -102,30 +96,33 @@ begin
   end;
 end;
 
+procedure UninstallOldVersion();
+begin
+  // 1. Revisar la ruta de la versión anterior específica
+  RunUninstaller(ExpandConstant('{userappdata}\StormGamesStudios\NewGameDir\LethalCompany_Launcher'));
+  
+  // 2. Revisar la ruta donde se va a instalar actualmente (por si es una reinstalación/actualización)
+  RunUninstaller(ExpandConstant('{app}'));
+end;
+
 procedure CloseApp();
 var
   ResultCode: Integer;
 begin
   // Cierra el actualizador y el launcher si están abiertos
-  Exec('taskkill', '/F /IM Launcher_Portable.exe', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+  Exec('taskkill', '/F /IM installer_updater.exe', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
   Exec('taskkill', '/F /IM win_launcher.exe', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
-  Exec('taskkill', '/F /IM "R.E.P.O. Launcher.exe"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
-  Exec('taskkill', '/F /IM "Launcher_Portable.exe"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
-  Exec('taskkill', '/F /IM "REPO.exe"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+  Exec('taskkill', '/F /IM "Lethal Company.exe"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+  Exec('taskkill', '/F /IM "Lethal Company - Launcher.exe"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
 end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
-var
-  ResultCode: Integer;
 begin
   // Durante la instalación, cierra cualquier instancia abierta
   if CurStep = ssInstall then
   begin
     CloseApp();
-
-    // Extraer y ejecutar el uninstaller-old.exe temporalmente
-    ExtractTemporaryFile('uninstaller-old.exe');
-    Exec(ExpandConstant('{tmp}\uninstaller-old.exe'), '', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+    UninstallOldVersion();
   end;
 end;
 
