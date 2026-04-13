@@ -4,4 +4,4 @@ python -m PyInstaller --onefile --windowed --noconsole --icon=download-icon.ico 
 python -m PyInstaller --onefile --windowed --noconsole --icon=lethalcompany.ico launcher_win.py
 python -m PyInstaller --onefile --windowed --noconsole --icon=lethalcompany.ico installer_updater.py
 python -m PyInstaller --onefile --windowed --noconsole --icon=lethalcompany.ico uninstaller-old.py
-echo 1.0.2 > version_win_launcher.txt
+echo 1.0.3 > version_win_launcher.txt
