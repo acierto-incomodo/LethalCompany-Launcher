@@ -13,6 +13,7 @@ $files = @(
   "main.spec",
   "theshooterlauncher_deb.deb",
   "launcher_win.spec",
+  "launcher_win.py",
   "installer_updater.spec",
   "version_win_launcher.txt",
   "Launcher_Portable.py",

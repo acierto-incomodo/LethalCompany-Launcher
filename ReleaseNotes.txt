@@ -1,6 +1,6 @@
 Cambios
 
-Launcher (v1.0.4):
+Launcher (v1.0.6):
 - NaN
 
 Juego (v81 ModsBuild v2):

@@ -12,11 +12,11 @@ from PySide6 import QtCore, QtWidgets, QtGui
 
 # ---------------- CONFIG ------------------
 
-LAUNCHER_VERSION = "1.0.0"
+LAUNCHER_VERSION = "1.0.2"
 
 BASE_URL_WIN = "https://github.com/acierto-incomodo/LethalCompany-Launcher/releases/latest/download/Build.zip"
 BUILD_URL_LINUX = "https://github.com/acierto-incomodo/LethalCompany-Launcher/releases/latest/download/Build.zip"
-VERSION_URL = "https://github.com/acierto-incomodo/LethalCompany-Launcher/releases/latest/download/version.txt"
+VERSION_URL = "https://github.com/acierto-incomodo/LethalCompany-Launcher/releases/latest/download/Version.txt"
 RELEASE_NOTES_URL = "https://github.com/acierto-incomodo/LethalCompany-Launcher/releases/latest/download/ReleaseNotes.txt"
 URL_7ZR = "https://github.com/acierto-incomodo/LethalCompany-Launcher/releases/latest/download/7zr.exe"
 
@@ -84,7 +84,7 @@ class LauncherWindow(QtWidgets.QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Panicore - Launcher")
+        self.setWindowTitle("Lethal Company - Launcher")
         self.setMinimumSize(520, 420)
         self.setMaximumSize(520, 420)
         self.setWindowIcon(QtGui.QIcon.fromTheme("applications-games"))
@@ -98,7 +98,7 @@ class LauncherWindow(QtWidgets.QWidget):
     def setup_ui(self):
         layout = QtWidgets.QVBoxLayout(self)
 
-        title = QtWidgets.QLabel("Panicore")
+        title = QtWidgets.QLabel("Lethal Company")
         title.setAlignment(QtCore.Qt.AlignCenter)
         title.setStyleSheet("font-size:22px; font-weight:bold;")
         layout.addWidget(title)
@@ -296,7 +296,7 @@ class LauncherWindow(QtWidgets.QWidget):
                 download_file(URL_7ZR, p_7zr, progress_cb)
 
                 # 2. Descargar partes .001 a .012
-                total_parts = 2
+                total_parts = 1
                 for i in range(1, total_parts + 1):
                     ext = f".{i:03d}"
                     url = f"{BASE_URL_WIN}{ext}"
